@@ -1,10 +1,10 @@
-#Mercado Libre Frontend Test
+# Mercado Libre Frontend Test
 Solución al test práctico para aspirantes al área de front-end de Mercado Libre.
 
-#Dependencies
+## Dependencies
 node >= 10
 npm >= 6
 
-#Server
+## Server
 Server will listen on port 8080.
 
