@@ -1,13 +1,17 @@
 const express = require("express");
 const APIService = require("./services/APIService");
+const cors = require("cors");
 
-const server = express();
+const app = express();
+app.use(cors());
+app.use(express.json());
+server.use(express.static(__dirname));
 
-server.get("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-server.get("/api/items", (req, res) => {
+app.get("/api/items", (req, res) => {
   const search = req.query.q;
   APIService.search(search)
     .then((results) => res.json(results))
