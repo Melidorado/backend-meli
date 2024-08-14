@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.json());
-server.use(express.static(__dirname));
+app.use(express.static(__dirname));
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -26,8 +26,26 @@ app.get("/api/items", (req, res) => {
     });
 });
 
+app.get("/api/items/:id", (req, res) => {
+  const {
+    params: { id },
+  } = req;
+
+  APIService.getItem(id)
+    .then((results) => res.json(results))
+    .catch((e) => {
+      if (e.response) {
+        console.error(e.response.data);
+        res.status(e.response.status).json(e.response.data);
+      } else {
+        console.log(e.message);
+        res.status(500).json(e.message);
+      }
+    });
+});
+
 const port = 8080;
 
-server.listen(port, () => {
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
